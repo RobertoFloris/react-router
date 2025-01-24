@@ -1,5 +1,6 @@
 import axios from "axios"
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 const ListPost = () => {
 
@@ -24,15 +25,13 @@ const ListPost = () => {
   return (
     <div className="container">
       <ul>
-        {posts?.map(post => (
+        {posts.map(post => (
           <li key={post.id} className="d-flex justify-content-between m-3">
             <span>
               <a>{post.title}</a>
             </span>
             <span>
-              <button className="btn btn-danger">
-                Elimina
-              </button>
+              <Link className="btn btn-success" to={`/dettaglio-post/${post.id}`}>Vedi dettaglio</Link>
             </span>
 
           </li>
