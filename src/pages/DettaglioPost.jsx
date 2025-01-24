@@ -1,10 +1,13 @@
 import { useParams, useNavigate } from "react-router-dom"
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 const DettaglioPost = () => {
 
   const { id } = useParams();
+
+  const params = id;
 
   const navigate = useNavigate();
 
@@ -40,7 +43,9 @@ const DettaglioPost = () => {
           <h5 className="card-title">{post?.title}</h5>
           <p className="card-text">{post?.content}</p>
           <p className="card-text"><strong>{post?.tags.map(tag => tag = `#${tag}`).join(" ")}</strong></p>
-          <button className="btn btn-danger" onClick={onDelete}>Elimina</button>
+          <button className="btn btn-danger m-3" onClick={onDelete}>Elimina</button>
+          <Link className="btn btn-success m-3" to={`/dettaglio-post/${params - 1}`}>Precedente</Link>
+          <Link className="btn btn-success m-3" to={`/dettaglio-post/${params + 1}`}>Successivo</Link>
         </div>
       </div>
     </div>
