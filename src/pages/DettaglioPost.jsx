@@ -1,10 +1,12 @@
-import { useParams } from "react-router-dom"
+import { useParams, useNavigate } from "react-router-dom"
 import axios from "axios";
 import { useEffect, useState } from "react";
 
 const DettaglioPost = () => {
 
   const { id } = useParams();
+
+  const navigate = useNavigate();
 
   const apiUrl = "http://localhost:3000"
 
@@ -23,6 +25,13 @@ const DettaglioPost = () => {
     fetchPosts()
   }, [])
 
+  const onDelete = () => {
+    axios.delete(`${apiUrl}/posts/${id}`)
+      .then(res => {
+        navigate(-1);
+      })
+  }
+
   return (
     <div className="col-12">
       <div className="card h-100">
@@ -31,7 +40,7 @@ const DettaglioPost = () => {
           <h5 className="card-title">{post?.title}</h5>
           <p className="card-text">{post?.content}</p>
           <p className="card-text"><strong>{post?.tags.map(tag => tag = `#${tag}`).join(" ")}</strong></p>
-          <button className="btn btn-danger">Elimina</button>
+          <button className="btn btn-danger" onClick={onDelete}>Elimina</button>
         </div>
       </div>
     </div>
